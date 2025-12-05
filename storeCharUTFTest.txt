@@ -1,0 +1,6 @@
+// UTF-8 narrow multibyte encoding
+char* str = u8"😅";
+
+(void)mbrlen(&str[0], strlen(str), NULL);
+
+printf("%s", str);

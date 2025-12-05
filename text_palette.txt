@@ -1,0 +1,86 @@
+Enemies
+
+🐊 - Kobold
+🐉 - Dragon
+🧙🏼‍♂️ - Wizard
+🧙🏻‍♀️ - Witch
+🌳 - Sentient Tree
+⛨  - Soldier
+🦇 - Fanged Bat
+🕷️ - Spider
+🐦‍🔥 - Phoenix
+🦌 - Deer
+🐻 - Bear
+⚰️ - Vampire
+🗿 - Golem 🗿
+▓ - Player
+
+🏻
+🏼
+🏽
+🏾
+🏿
+🏻🏼🏽🏾🏿 (for charging attacks)
+-------------------------
+Action Menu
+╔═══════════════╗ 
+║ ▸ Open Chest  ║
+║   Leave Alone ║
+╚═══════════════╝
+
+-------------------------
+Misc
+
+0 ⛉ (Broken)
+
+📜  Frost Scroll
+        Next Attack Does ❄️Frost❄️
+
+🔥 Burning 🔥
+        5 Damage Per Round
+
+☠︎︎ - Dead Enemy
+𖦏 - Target Enemy
+🗝️ - Key
+
+-------------------------
+Environment
+                𓅓
+𖧧𖧧𖧧♒︎♒︎♒︎𖠰𖠰𖠰𖠰🕸🕸☣☣
+🏪 - Shop
+🔳 - Treasure Chest
+-------------------------
+Special Effects
+⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘
+𒌐  Escape Unavailable  𒌐
+⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘
+-------------------------
+Dialoge menu
+╔════════════════════════════════════════╗
+║ Kobold : Halt Traveler!                ║
+║          How dare you enter my domain? ║
+║          Know you the price of...  ◈◆︎ ║
+╚════════════════════════════════════════╝
+
+------------------------------
+Character menu
+╔════════════════════════════════════╗
+║ Kobold :  20 ♥️ | 13 🛡️ | 10 📀   ║
+║           3 🗡️ Graphite Claws      ║
+║ Description : Slimy Reptile        ║
+║ Ability     : Burns on hit         ║
+║ Status      : ❄️Frost❄️           ║
+║ *Accuracy reduced by 20%           ║
+╚════════════════════════════════════╝
+--------------------------------------
+Inventory
+╔════════════════════════════════════════════╗
+║ Inventory                                  ║
+║ » Engraved Breastplate*                    ║ 
+║       +5 🛡️ | Cancel First Hit             ║
+║ ▸ Dagger*                                  ║
+║       +2 🗡️ | Always Strike First          ║
+║   Small Health Potion*                     ║
+║       +3 ❤️ | Spend a Move                 ║
+║ U : Use | E : Equip | T : Toss | C : Close ║
+╚════════════════════════════════════════════╝
