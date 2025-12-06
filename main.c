@@ -19,7 +19,7 @@ int main()
     SetConsoleOutputCP(CP_UTF8);
     setlocale(LC_ALL, "en_US.utf8");
 
-    char* mainHub = loadFileContents("MainHub.txt");
+    char* mainHub = loadLevelChunk("Level0_1.txt");
 
     printf("%s", mainHub);
 

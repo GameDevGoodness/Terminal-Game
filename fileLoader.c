@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* loadFileContents(char* fileName)
+char* loadLevelChunk(char* fileName)
 {
     FILE *fp = fopen(fileName, "r");
     
@@ -10,13 +10,29 @@ char* loadFileContents(char* fileName)
     int fileSize = ftell(fp);
     fseek(fp, 0, SEEK_SET);
     
-    char* fileContent = (char*)malloc(fileSize + 1);
-    
-    fread(fileContent, 1, fileSize, fp);
+    char* fileContent = (char*)malloc(fileSize);
 
-    fileContent[fileSize] = '\0';
+    int chCounter;
+    int deadSpaceCnt = 0;
+    for (chCounter = 0; chCounter < fileSize; chCounter++)
+    {
+        char ch = fgetc(fp);
+
+        if (ch == 'E')
+            break;
+        
+        if (ch != ' ')
+            fileContent[chCounter-deadSpaceCnt] = ch;
+        else
+            deadSpaceCnt++;
+    }
     
     fclose(fp);
+    
+    chCounter -= deadSpaceCnt;
+
+    fileContent[chCounter + 1] = '\0';
+    fileContent = realloc(fileContent, chCounter + 1);
 
     return fileContent;
 }

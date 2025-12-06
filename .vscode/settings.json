@@ -1,5 +1,8 @@
 {
     "files.associations": {
         "wchar.h": "c"
+    },
+    "[plaintext]": {
+        "editor.fontFamily": "Cascadia Mono"
     }
 }
