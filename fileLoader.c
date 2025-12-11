@@ -2,37 +2,27 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* loadLevelChunk(char* fileName)
+char** loadLevelChunk(char* fileName, int* row)
 {
     FILE *fp = fopen(fileName, "r");
     
-    fseek(fp, 0, SEEK_END);
-    int fileSize = ftell(fp);
-    fseek(fp, 0, SEEK_SET);
-    
-    char* fileContent = (char*)malloc(fileSize);
+    char **fileContent = NULL;
 
-    int chCounter;
-    int deadSpaceCnt = 0;
-    for (chCounter = 0; chCounter < fileSize; chCounter++)
+    char line[256];
+    *row = 0;
+
+    while ((fgets(line, sizeof(line), fp)) != NULL)
     {
-        char ch = fgetc(fp);
+        fileContent = realloc(fileContent, sizeof(char*) * ((*row) + 1));
+        fileContent[*row] = (char*)malloc(sizeof(char) * strlen(line));
+        strcpy(fileContent[*row], line);
 
-        if (ch == 'E')
+        (*row)++;
+        if (strchr(line, 'E') != NULL)
             break;
-        
-        if (ch != ' ')
-            fileContent[chCounter-deadSpaceCnt] = ch;
-        else
-            deadSpaceCnt++;
     }
-    
-    fclose(fp);
-    
-    chCounter -= deadSpaceCnt;
 
-    fileContent[chCounter + 1] = '\0';
-    fileContent = realloc(fileContent, chCounter + 1);
+    fclose(fp);
 
     return fileContent;
 }

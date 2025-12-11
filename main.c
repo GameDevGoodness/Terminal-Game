@@ -11,6 +11,7 @@
 #include <windows.h>
 
 #include "fileLoader.c"
+#include "cell.c"
 
 void listenInputs(char*);
 
@@ -18,10 +19,13 @@ int main()
 {
     SetConsoleOutputCP(CP_UTF8);
     setlocale(LC_ALL, "en_US.utf8");
+    int rows;
+    char** mainHub = loadLevelChunk("Level0_1.txt", &rows);
 
-    char* mainHub = loadLevelChunk("Level0_1.txt");
-
-    printf("%s", mainHub);
+    for (int i = 0; i < rows; i++)
+    {
+        printf("%s", mainHub[i]);
+    }
 
     pthread_t inputThreadID;
 
