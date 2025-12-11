@@ -24,7 +24,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "c:/Users/joshd/Desktop/Terminal Game/**"
+                "C:/Users/Jordan Frazer/Desktop/Terminal-Game/**"
             ],
             "defines": [
                 "_DEBUG",
