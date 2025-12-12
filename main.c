@@ -12,6 +12,7 @@
 
 #include "fileLoader.c"
 #include "cell.c"
+#include "mainMenu.c"
 
 void listenInputs(char*);
 
@@ -22,10 +23,20 @@ int main()
     int rows;
     char** mainHub = loadLevelChunk("Level0_1.txt", &rows);
 
-    for (int i = 0; i < rows; i++)
-    {
-        printf("%s", mainHub[i]);
-    }
+    
+    // for (int i = 0; i < rows; i++)
+    // {
+    //     printf("%s", mainHub[i]);
+    // }
+
+    textBox *mainMenuTextBox = (textBox*)malloc(sizeof(textBox));
+    mainMenuTextBox->text = "Why hello there!\nBrotato";
+    mainMenuTextBox->textPerLine = 20;
+    mainMenuTextBox->paddingX = 4;
+    mainMenuTextBox->paddingY = 1;
+    mainMenuTextBox->textOptionsCount = 2;
+    createMainMenu(mainMenuTextBox);
+    free(mainMenuTextBox);
 
     pthread_t inputThreadID;
 
@@ -34,8 +45,11 @@ int main()
     pthread_create(&inputThreadID, NULL, (void*)listenInputs, &playerInput);
     pthread_join(inputThreadID, NULL);
 
+    // release board memory
+    for (int i = 0; i < rows; i++)
+        free(mainHub[i]);
     free(mainHub);
-    
+
     return 0;
 }
 
