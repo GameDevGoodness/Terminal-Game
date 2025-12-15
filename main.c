@@ -11,7 +11,6 @@
 #include <windows.h>
 
 #include "fileLoader.c"
-#include "board.c"
 #include "mainMenu.c"
 
 void listenInputs(char*);
@@ -20,11 +19,8 @@ int main()
 {
     SetConsoleOutputCP(CP_UTF8);
     setlocale(LC_ALL, "en_US.utf8");
-    int rows;
-    char** mainHub = loadLevelChunk("Level0_1.txt", &rows);
-    struct board board;
-    populateBoard(mainHub, &board, rows);
-    printBoard(&board);
+    
+    buildLevel("Level0_1.txt");
 
     textBox *mainMenuTextBox = (textBox*)malloc(sizeof(textBox));
     mainMenuTextBox->text = "Why hello there!\nBrotato🔳";
@@ -42,14 +38,6 @@ int main()
     pthread_create(&inputThreadID, NULL, (void*)listenInputs, &playerInput);
     pthread_join(inputThreadID, NULL);
 
-    // release board memory
-    for (int i = 0; i < rows; i++)
-    {
-        free(mainHub[i]);
-    }
-    free(mainHub);
-
-    freeBoard(&board);
     return 0;
 }
 

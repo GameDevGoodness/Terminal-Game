@@ -1,21 +1,24 @@
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef unsigned char byte;
 
-struct board
+typedef struct
 {
     struct cell** cells;
     int rows;
     int* cols;
-};
+
+} board;
 
 struct cell
 {
     char ch[5];
     void *attributeData;
     int x, y;
-
+    bool connector;
+    
     enum
     {
         empty,
@@ -57,7 +60,7 @@ void getCellType(struct cell cell)
     }
 }
 
-void populateBoard(char** level, struct board* board, int rows)
+void populateBoard(char** level, board* board, int rows)
 {
     // Assign and allocate the rows of the board
     board->rows = rows;
@@ -114,7 +117,7 @@ void populateBoard(char** level, struct board* board, int rows)
     }
 }
 
-void printBoard(struct board* board)
+void printBoard(board* board)
 {
     for (int i = 0; i < board->rows; i++)
     {
@@ -125,7 +128,7 @@ void printBoard(struct board* board)
     }
 }
 
-void freeBoard(struct board *board)
+void freeBoard(board *board)
 {
     for (int i = 0;  i < board->rows; i++)
     {
