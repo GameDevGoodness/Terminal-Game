@@ -11,7 +11,7 @@
 #include <windows.h>
 
 #include "fileLoader.c"
-#include "cell.c"
+#include "board.c"
 #include "mainMenu.c"
 
 void listenInputs(char*);
@@ -22,20 +22,17 @@ int main()
     setlocale(LC_ALL, "en_US.utf8");
     int rows;
     char** mainHub = loadLevelChunk("Level0_1.txt", &rows);
-
-    
-    // for (int i = 0; i < rows; i++)
-    // {
-    //     printf("%s", mainHub[i]);
-    // }
+    struct board board;
+    populateBoard(mainHub, &board, rows);
+    printBoard(&board);
 
     textBox *mainMenuTextBox = (textBox*)malloc(sizeof(textBox));
-    mainMenuTextBox->text = "Why hello there!\nBrotato";
+    mainMenuTextBox->text = "Why hello there!\nBrotato🔳";
     mainMenuTextBox->textPerLine = 20;
     mainMenuTextBox->paddingX = 4;
     mainMenuTextBox->paddingY = 1;
     mainMenuTextBox->textOptionsCount = 2;
-    createMainMenu(mainMenuTextBox);
+   // createMainMenu(mainMenuTextBox);
     free(mainMenuTextBox);
 
     pthread_t inputThreadID;
@@ -47,9 +44,12 @@ int main()
 
     // release board memory
     for (int i = 0; i < rows; i++)
+    {
         free(mainHub[i]);
+    }
     free(mainHub);
 
+    freeBoard(&board);
     return 0;
 }
 
