@@ -1,4 +1,4 @@
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(_WIN32)
 #define OS_WINDOWS 1
 #elif defined(__linux__)
 #define OS_LINUX 1
@@ -15,8 +15,8 @@
 
 // Unicode/Terminal Helpers
 #ifdef OS_WINDOWS
-#include <windows.h>
-#include <conio.h>
+//#include <windows.h>
+//#include <conio.h>
 
 #elif OS_LINUX
 #include <locale.h>
