@@ -1,32 +1,35 @@
+#if defined(_WIN32) || defined(_WIN64)
+#define OS_WINDOWS 1
+#elif defined(__linux__)
+#define OS_LINUX 1
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-
-#if defined(_WIN32) || defined(_WIN64)
-#include <windows.h>
-#include <conio.h>
-
-#elif defined(__linux__)
-#include <ncurses.h>
-
-#endif
-
 #include <pthread.h>
-
-// Unicode/Terminal Helpers
-#include <locale.h>
 
 #include "fileLoader.c"
 #include "mainMenu.c"
+
+// Unicode/Terminal Helpers
+#ifdef OS_WINDOWS
+#include <windows.h>
+#include <conio.h>
+
+#elif OS_LINUX
+#include <locale.h>
+#include <ncurses.h>
+#endif
 
 void listenInputs(char*);
 
 int main()
 {
-#if defined(_WIN32) || defined(_WIN64)
+#if OS_WINDOWS
     SetConsoleOutputCP(CP_UTF8);
-#elif defined(__linux__)
+#elif OS_LINUX
     setlocale(LC_ALL, "en_US.utf8");
 #endif
 
