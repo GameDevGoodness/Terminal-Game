@@ -2,11 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include <conio.h>
-
-// Unicode/Terminal Helpers
-#include <wchar.h>
-#include <windows.h>
 
 typedef struct
 {

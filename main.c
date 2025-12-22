@@ -15,8 +15,8 @@
 
 // Unicode/Terminal Helpers
 #ifdef OS_WINDOWS
-//#include <windows.h>
-//#include <conio.h>
+#include <windows.h>
+#include <conio.h>
 
 #elif OS_LINUX
 #include <locale.h>
