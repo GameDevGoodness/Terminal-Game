@@ -4,26 +4,27 @@
 
 #include "board.c"
 
-board* loadLevelChunks(FILE*);
+board* loadLevelChunks(FILE*, int*);
+void connectChunks(board*, int);
 
 void buildLevel(char* filename)
 {
     FILE* fp = fopen(filename, "r");
     
-    int chunks = 0;
+    int chunks;
+    board* boards = loadLevelChunks(fp, &chunks);
 
-    board* boards = loadLevelChunks(fp);
-    printBoard(&boards[0]);
-    printBoard(&boards[1]);
+    connectChunks(boards, chunks);
+
     fclose(fp);
 }
 
-board* loadLevelChunks(FILE* fp)
+board* loadLevelChunks(FILE* fp, int* boardCount)
 {
     char **fileContent = NULL;
     board* boards = NULL;
 
-    int boardCount = 0;
+    *boardCount = 0;
     char line[256];
     int rows = 0;
     bool readBoardSettings = false;
@@ -35,7 +36,7 @@ board* loadLevelChunks(FILE* fp)
         {
             rows = 0;
             readBoardSettings = false;
-            boards = realloc(boards, sizeof(board) * (boardCount + 1));
+            boards = realloc(boards, sizeof(board) * (*boardCount + 1));
         }
 
         if (readBoardSettings == false)
@@ -55,8 +56,8 @@ board* loadLevelChunks(FILE* fp)
                 int y1, y2;
 
                 sscanf(line, "Link: %d %d %d %d", &x1, &y1, &x2, &y2);
-                boards[boardCount - 1].cells[y1][x1].connector = true;
-                boards[boardCount - 1].cells[y2][x2].connector = true;
+                boards[*boardCount - 1].xCon = realloc(boards[*boardCount - 1].xCon, 2);
+                boards[*boardCount - 1].yCon = realloc(boards[*boardCount - 1].yCon, 2);
             }
             else if (strcmp(line, "Spawn:"))
             {
@@ -67,10 +68,10 @@ board* loadLevelChunks(FILE* fp)
         // Fill board with text info when board finish read symbol is found
         if (strchr(line, '~') != NULL)
         {
-            populateBoard(fileContent, &boards[boardCount], rows);
+            populateBoard(fileContent, &boards[*boardCount], rows);
 
             readBoardSettings = true;
-            boardCount++;
+            (*boardCount)++;
 
             // release board memory
             for (int i = 0; i < rows; i++)
@@ -81,4 +82,20 @@ board* loadLevelChunks(FILE* fp)
     }
 
     return boards;
+}
+
+void connectChunks(board* boards, int chunks)
+{
+    for (int i = 0; i < chunks; i++)
+    {
+        board chunk = boards[i];
+
+        printBoard(&boards[i]);
+        // for (int j = 0; j < chunk.rows; j++)
+        // {
+        //     for (int k = 0; k < chunk.cols[j]; k++)
+        //     {
+        //     }
+        // }
+    }
 }

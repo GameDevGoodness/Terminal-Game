@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <stdbool.h>
 
 typedef unsigned char byte;
@@ -10,14 +11,17 @@ typedef struct
     int rows;
     int* cols;
 
+    // To hold which cells are connectors
+    int* xCon;
+    int* yCon;
 } board;
 
 struct cell
 {
-    char ch[5];
+    char base[5];
+    char overlap[5];
     void *attributeData;
     int x, y;
-    bool connector;
     
     enum
     {
@@ -54,7 +58,7 @@ struct player
 
 void getCellType(struct cell cell)
 {
-    if (strcmp(cell.ch, "▓") == 0)
+    if (strcmp(cell.base, "▓") == 0)
     {
         cell.attribute = player;
     }
@@ -66,7 +70,9 @@ void populateBoard(char** level, board* board, int rows)
     board->rows = rows;
     board->cells = (struct cell **)malloc(sizeof(struct cell *) * rows);
     board->cols = (int *)malloc(rows * sizeof(int));
-
+    board->xCon = NULL;
+    board->yCon = NULL;
+    
     for (int i = 0; i < rows; i++)
     {
         int* skips = (int*)malloc(strlen(level[i]) * sizeof(int));
@@ -104,8 +110,9 @@ void populateBoard(char** level, board* board, int rows)
         int bytePos = 0;
         for (int j = 0; j < board->cols[i]; j++)
         {
-            memset(board->cells[i][j].ch, 0, 5);
-            memcpy(board->cells[i][j].ch, level[i] + bytePos, skips[j]);
+            memset(board->cells[i][j].base, 0, 5);
+            memset(board->cells[i][j].overlap, 0, 5);
+            memcpy(board->cells[i][j].base, level[i] + bytePos, skips[j]);
             board->cells[i][j].x = j + 1;
             board->cells[i][j].y = i + 1;
 
@@ -117,13 +124,32 @@ void populateBoard(char** level, board* board, int rows)
     }
 }
 
+void insertCellOverlap(board* board, int x, int y, char* overlap)
+{
+    memset(board->cells[y][x].overlap, 0, 5);
+    strcpy(board->cells[y][x].overlap, overlap);
+}
+
+void deleteCellOverlap(board* board, int x, int y)
+{
+    memset(board->cells[y][x].overlap, 0, 5);
+}
+
 void printBoard(board* board)
 {
     for (int i = 0; i < board->rows; i++)
     {
         for (int j = 0; j < board->cols[i]; j++)
         {
-            printf("%s", board->cells[i][j].ch);
+            // if (strcmp(board->cells[i][j].base, "\n") == 0)
+            //     printf("\n");
+            // else
+            //     printf("x%dy%d ", board->cells[i][j].x, board->cells[i][j].y);
+
+            if (board->cells[i][j].overlap[0] == '\0')
+                printf("%s", board->cells[i][j].base);
+            else
+                printf("%s", board->cells[i][j].overlap);
         }
     }
 }
