@@ -27,5 +27,5 @@ Text Window System:
 ╔════════════════════════════════════════╗
 ║ Kobold : Halt Traveler!                ║
 ║          How dare you enter my domain? ║
-║          Know you the price of...  ◈◆︎ ║
+║          Know you the price of...  ◈◆︎║
 ╚════════════════════════════════════════╝

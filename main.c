@@ -27,7 +27,7 @@ void restoreTerminal()
 {
 #if !OS_WINDOWS
     // restore original Linux terminal settings
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &originalTerminal);
 #endif
 
     // restore the original cursor and return to the main terminal buffer
