@@ -1,7 +1,7 @@
 #if defined(_WIN32)
 #define OS_WINDOWS 1
-#elif defined(__linux__)
-#define OS_LINUX 1
+#else
+#define OTHER_OS 1
 #endif
 
 #include <stdio.h>
@@ -18,7 +18,7 @@
 #include <windows.h>
 #include <conio.h>
 
-#elif OS_LINUX
+#elif OTHER_OS
 #include <locale.h>
 #include <ncurses.h>
 #endif
@@ -29,10 +29,10 @@ int main()
 {
 #if OS_WINDOWS
     SetConsoleOutputCP(CP_UTF8);
-#elif OS_LINUX
+#elif OTHER_OS
     setlocale(LC_ALL, "en_US.utf8");
 #endif
-
+    
     buildLevel("Level0_1.txt");
 
     textBox *mainMenuTextBox = (textBox*)malloc(sizeof(textBox));
@@ -41,11 +41,11 @@ int main()
     mainMenuTextBox->paddingX = 4;
     mainMenuTextBox->paddingY = 1;
     mainMenuTextBox->textOptionsCount = 2;
-   // createMainMenu(mainMenuTextBox);
+    createMainMenu(mainMenuTextBox);
     free(mainMenuTextBox);
 
     pthread_t inputThreadID;
-
+    
     char playerInput;
 
     pthread_create(&inputThreadID, NULL, (void*)listenInputs, &playerInput);
