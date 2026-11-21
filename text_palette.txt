@@ -59,7 +59,7 @@ Dialoge menu
 ╔════════════════════════════════════════╗
 ║ Kobold : Halt Traveler!                ║
 ║          How dare you enter my domain? ║
-║          Know you the price of...  ◈◆︎  ║
+║          Know you the price of...  ◈◆︎ ║
 ╚════════════════════════════════════════╝
 
 ------------------------------
@@ -79,7 +79,7 @@ Inventory
 ║ » Engraved Breastplate*                    ║ 
 ║       +5 🛡️ | Cancel First Hit             ║
 ║ ▸ Dagger*                                  ║
-║       +2 🗡️ | Always Strike First          ║
+║       +2 🗡 | Always Strike First          ║
 ║   Small Health Potion*                     ║
 ║       +3 ❤️ | Spend a Move                 ║
 ║ U : Use | E : Equip | T : Toss | C : Close ║
