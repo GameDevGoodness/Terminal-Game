@@ -1,4 +1,4 @@
-#include "include/terminal.h"
+#include "../include/terminal.h"
 
 #if OS_WINDOWS
 #include <conio.h>
