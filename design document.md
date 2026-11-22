@@ -29,3 +29,7 @@ Text Window System:
 ║          How dare you enter my domain? ║
 ║          Know you the price of...  ◈◆︎║
 ╚════════════════════════════════════════╝
+
+
+ToDo:
+    - Make a json config of all emojis/characters used in the game along with their associated visual width so the board can be properly spaced.

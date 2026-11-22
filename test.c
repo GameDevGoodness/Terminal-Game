@@ -1,7 +1,8 @@
+#include <locale.h>
 #include <stdio.h>
 #include <wchar.h>
-#include <locale.h>
 #include <windows.h>
+
 
 #define SCREEN_WIDTH 130
 #define SCREEN_HEIGHT 10
@@ -123,10 +124,8 @@ void draw_screen()
             }
 
             // Convert directly into the frame_buffer instead of a temp buffer
-            int bytes = WideCharToMultiByte(
-                CP_UTF8, 0, wch_buf, char_count,
-                frame_buffer + offset, sizeof(frame_buffer) - offset - 16,
-                NULL, NULL);
+            int bytes = WideCharToMultiByte(CP_UTF8, 0, wch_buf, char_count, frame_buffer + offset,
+                                            sizeof(frame_buffer) - offset - 16, NULL, NULL);
 
             if (bytes > 0)
             {
@@ -135,8 +134,8 @@ void draw_screen()
                 wchar_t current_glyph = screen[y][x].glyph;
 
                 // Append padding directly to the frame_buffer
-                if (current_glyph == L'═' || current_glyph == L'╔' || current_glyph == L'╚' ||
-                    current_glyph == L'╦' || current_glyph == L'╩' || current_glyph == L'╬')
+                if (current_glyph == L'═' || current_glyph == L'╔' || current_glyph == L'╚' || current_glyph == L'╦' ||
+                    current_glyph == L'╩' || current_glyph == L'╬')
                 {
                     // UTF-8 encoding for '═' (U+2550) is \xE2\x95\x90
                     memcpy(frame_buffer + offset, "\xE2\x95\x90", 3);
