@@ -49,9 +49,9 @@ int main()
 
 // sleep for 16 ms (60 fps)
 #if OS_WINDOWS
-        Sleep(16);
+        Sleep(500);
 #else
-        usleep(16000);
+        usleep(500000);
 #endif
     }
 
